@@ -6,3 +6,5 @@ public/exports/
 .env
 .env.*
 !.env.example
+/docs/
+/Professional_Networking_Draaiboek_2026-27.pdf

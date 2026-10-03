@@ -82,23 +82,8 @@ npm run verify
 
 Reset `BASE_PATH` to `/` for a root-path local preview. The default canonical hostname is the owner's GitHub Pages hostname; deployment supplies the configured origin. No custom domain is configured.
 
-## Planning docs
-
-| Document | Purpose |
-| --- | --- |
-| [Product brief](docs/product-brief.md) | Purpose, audience, scope, and accepted direction |
-| [Interview notes](docs/interview-notes.md) | Confirmed owner preferences and questions still to resolve |
-| [Website specification](docs/website-spec.md) | Routes, page sections, navigation, buttons, and behavior |
-| [Content plan](docs/content-plan.md) | Material to gather, writing templates, and school coverage |
-| [School site requirements](docs/school-site-requirements.md) | E-portfolio-specific requirements from the supplied brief |
-| [Style guide](docs/style-guide.md) | Visual direction, tokens, typography, layouts, and accessibility |
-| [PDF export](docs/pdf-export.md) | Export scope, appearance, behavior, and validation |
-| [Technical plan](docs/technical-plan.md) | Application structure, publishing, and checks |
-
-Start with the product brief; use the website specification and style guide together when building pages.
-
 ## Source and verification
 
-These docs translate the owner's request, ongoing interview, and pasted website outline into a buildable specification. The school brief is now supplied; its use is limited to the e-portfolio portions at the owner's request. The school site requirements document records that scope. Activity selections, completion, personal history, and project claims must not be published as facts without confirmation.
+Activity selections, completion, personal history, and project claims must not be published as facts without confirmation.
 
 Dependency audit during setup reported a development-only advisory in `http-cache-semantics` through Astro, with no patched registry release available. Do not apply npm's suggested downgrade to Astro 2. The published site serves static files and does not run this cache; recheck for a compatible fix when updating dependencies.
