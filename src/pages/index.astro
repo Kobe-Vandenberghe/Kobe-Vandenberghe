@@ -1,0 +1,38 @@
+---
+import Site from '../layouts/Site.astro';
+import ActivityList from '../components/ActivityList.astro';
+import { profile, interests } from '../data/profile';
+import { publishedActivity } from '../lib/activity';
+import { pathFor } from '../lib/urls';
+const entries = (await publishedActivity()).slice(0, 3);
+---
+<Site section="home">
+  <section class="home-intro" aria-labelledby="intro-heading">
+    <p class="eyebrow meta">SOFTWARE ENGINEERING STUDENT <span aria-hidden="true">/</span> BELGIUM</p>
+    <h1 id="intro-heading">Kobe Vandenberghe<span class="accent">.</span></h1>
+    <p class="intro-copy">{profile.introduction}</p>
+    <div class="intro-links">
+      <a href={profile.github}>GitHub <span aria-hidden="true">↗</span></a>
+      <a href={profile.linkedin}>LinkedIn <span aria-hidden="true">↗</span></a>
+      <a href={pathFor('cv/kobe-vandenberghe-cv.pdf')} download>Download CV <span aria-hidden="true">↓</span><span class="sr-only"> (PDF)</span></a>
+    </div>
+  </section>
+  <section class="focus-section" aria-labelledby="focus-heading">
+    <div class="section-heading"><h2 id="focus-heading">What interests me</h2><span class="meta">CURRENT FOCUS</span></div>
+    <div class="focus-grid grid gap-8 md:grid-cols-3">
+      {interests.map((interest) => (
+        <div class="focus-item">
+          <span class="meta focus-number">{interest.number}</span>
+          <h3>{interest.title}</h3>
+          <p>{interest.description}</p>
+          <p class="meta focus-tools">{interest.tools}</p>
+        </div>
+      ))}
+    </div>
+    <a class="quiet-link" href={pathFor('about/')}>More about me <span aria-hidden="true">→</span></a>
+  </section>
+  {entries.length > 0 && <section class="recent-section" aria-labelledby="recent-heading">
+    <div class="section-heading"><h2 id="recent-heading">Recent activity</h2><a class="quiet-link" href={pathFor('activity/')}>View all <span aria-hidden="true">→</span></a></div>
+    <ActivityList entries={entries} />
+  </section>}
+</Site>

@@ -1,0 +1,25 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Site from '../../layouts/Site.astro';
+import { publishedActivity, formatDate, readingTime, typeLabel } from '../../lib/activity';
+import { pathFor } from '../../lib/urls';
+export async function getStaticPaths() {
+  return (await publishedActivity()).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+interface Props { entry: CollectionEntry<'activity'>; }
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<Site title={entry.data.title} description={entry.data.summary} section="activity">
+  <article class="article-page">
+    <a class="back-link" href={pathFor('activity/')}><span aria-hidden="true">←</span> Activity</a>
+    <header class="article-heading">
+      <p class="meta article-meta"><time datetime={entry.data.date}>{formatDate(entry.data.date)}</time> <span aria-hidden="true">·</span> {typeLabel(entry.data.type)} <span aria-hidden="true">·</span> {readingTime(entry)} min read</p>
+      <h1>{entry.data.title}</h1>
+      <p class="page-deck">{entry.data.summary}</p>
+    </header>
+    {entry.data.hero && <figure><img src={pathFor(entry.data.hero.src)} alt={entry.data.hero.alt} />{entry.data.hero.caption && <figcaption>{entry.data.hero.caption}</figcaption>}</figure>}
+    <div class="prose"><Content /></div>
+    <div class="article-end"><a class="quiet-link" href={pathFor('activity/')}><span aria-hidden="true">←</span> All activity</a><a class="quiet-link" href={pathFor(`exports/activity-${entry.id}.pdf`)} download>Download article PDF <span aria-hidden="true">↓</span></a></div>
+  </article>
+</Site>

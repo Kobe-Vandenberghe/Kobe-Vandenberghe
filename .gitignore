@@ -1,0 +1,8 @@
+tmp/
+node_modules/
+dist/
+public/exports/
+.astro/
+.env
+.env.*
+!.env.example

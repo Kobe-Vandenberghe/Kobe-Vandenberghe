@@ -1,0 +1,12 @@
+---
+import Site from '../../layouts/Site.astro';
+import ActivityList from '../../components/ActivityList.astro';
+import { publishedActivity } from '../../lib/activity';
+const entries = await publishedActivity();
+const years = [...new Set(entries.map((entry) => entry.data.date.slice(0, 4)))];
+---
+<Site title="Activity" section="activity" description="Development notes, events, and reflections on software engineering.">
+  <header class="page-heading"><p class="eyebrow meta">NOTES & REFLECTIONS</p><h1>Activity<span class="accent">.</span></h1><p class="page-deck">Things I’m working on, learning, and thinking about.</p></header>
+  {years.map((year) => <section class="archive-year" aria-labelledby={`year-${year}`}><h2 class="archive-label" id={`year-${year}`}>{year}</h2><ActivityList entries={entries.filter((entry) => entry.data.date.startsWith(year))} /></section>)}
+  {entries.length === 0 && <p class="empty-state">Nothing published yet. Notes and reflections will appear here.</p>}
+</Site>

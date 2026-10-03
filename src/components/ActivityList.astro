@@ -1,0 +1,22 @@
+---
+import type { Activity } from '../lib/activity';
+import { formatDate, readingTime, typeLabel } from '../lib/activity';
+import { pathFor } from '../lib/urls';
+interface Props { entries: Activity[]; }
+const { entries } = Astro.props;
+---
+<ul class="activity-list">
+  {entries.map((entry) => (
+    <li>
+      <time class="meta activity-date" datetime={entry.data.date}>{formatDate(entry.data.date, true)}</time>
+      <a class="activity-link" href={pathFor(`activity/${entry.id}/`)}>
+        <div>
+          <h3>{entry.data.title}</h3>
+          <p class="activity-summary">{entry.data.summary}</p>
+          <p class="meta activity-meta">{typeLabel(entry.data.type)} <span aria-hidden="true">·</span> {readingTime(entry)} min read</p>
+        </div>
+        <span class="row-arrow" aria-hidden="true">↗</span>
+      </a>
+    </li>
+  ))}
+</ul>

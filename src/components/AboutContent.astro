@@ -1,0 +1,17 @@
+---
+import { skills } from '../data/profile';
+---
+<div class="about-copy prose">
+  <p>I’m Kobe, a Software Engineering student at Howest, based in Roeselare, Belgium. I work mostly with .NET and ASP.NET Core, and I’m especially interested in the systems around an application: its architecture, data, infrastructure, and delivery.</p>
+  <p>DevOps is the part I’m most drawn to. I enjoy working through how services are deployed, how changes move safely between environments, and how infrastructure can be made reproducible. System design and databases are closely connected interests.</p>
+  <p>I also have hands-on experience with agentic systems: AI agent workflows, MCP integrations, agent tools and skills, and integrating system prompts into custom agent runtimes. I’m interested in how agents can do useful work with the right tools and context.</p>
+  <p>I’m still a student, with plenty to learn. I like problems that push beyond a standard CRUD application and give me a reason to understand how a system works.</p>
+</div>
+<section class="skills-section" aria-labelledby="skills-heading">
+  <div class="section-heading"><h2 id="skills-heading">Tools I work with</h2><span class="meta">TECHNICAL SKILLS</span></div>
+  <div class="skills-grid grid gap-8 md:grid-cols-3">
+    {skills.map((group) => <div><h3>{group.title}</h3><ul>{group.items.map((item) => <li>{item}</li>)}</ul></div>)}
+  </div>
+  <p class="skills-note">My main stack is .NET. These are tools I’ve used across backend, cloud, and infrastructure work; I’m continuing to develop my experience with them.</p>
+</section>
+<div class="language-row"><span class="meta">LANGUAGES</span><p>Dutch <span class="muted">Native</span><span class="language-divider" aria-hidden="true">/</span> English <span class="muted">C1</span></p></div>

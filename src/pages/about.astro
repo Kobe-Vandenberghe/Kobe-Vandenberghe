@@ -1,0 +1,15 @@
+---
+import Site from '../layouts/Site.astro';
+import AboutContent from '../components/AboutContent.astro';
+import { profile } from '../data/profile';
+import { pathFor } from '../lib/urls';
+---
+<Site title="About" section="about" description="My interests in .NET backend development, DevOps, system architecture, and agentic systems.">
+  <header class="page-heading"><p class="eyebrow meta">BACKGROUND & INTERESTS</p><h1>About<span class="accent">.</span></h1><p class="page-deck">Backend development, DevOps, and the systems in between.</p></header>
+  <AboutContent />
+  <div class="about-links intro-links">
+    <a href={profile.github}>GitHub <span aria-hidden="true">↗</span></a>
+    <a href={profile.linkedin}>LinkedIn <span aria-hidden="true">↗</span></a>
+    <a href={pathFor('cv/kobe-vandenberghe-cv.pdf')} download>Download CV <span aria-hidden="true">↓</span></a>
+  </div>
+</Site>

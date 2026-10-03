@@ -1,0 +1,21 @@
+---
+import { render } from 'astro:content';
+import Site from '../layouts/Site.astro';
+import AboutContent from '../components/AboutContent.astro';
+import { profile, interests } from '../data/profile';
+import { publishedActivity, formatDate, readingTime, typeLabel, today } from '../lib/activity';
+import { pathFor } from '../lib/urls';
+const entries = await publishedActivity();
+const articles = await Promise.all(entries.map(async (entry) => ({ entry, ...(await render(entry)) })));
+---
+<Site title="Portfolio snapshot" noindex>
+  <div class="print-tools"><p>A complete snapshot of this portfolio.</p><button type="button" id="print-button">Print / Save as PDF</button></div>
+  <div class="snapshot">
+    <header class="page-heading"><p class="eyebrow meta">PORTFOLIO <span aria-hidden="true">/</span> {today()}</p><h1>{profile.name}<span class="accent">.</span></h1><p class="page-deck">{profile.role} · {profile.location}</p><p class="intro-copy">{profile.introduction}</p><p class="print-profiles"><a href={profile.github}>GitHub</a> · <a href={profile.linkedin}>LinkedIn</a></p></header>
+    <section class="focus-section snapshot-interests" aria-labelledby="interests-heading"><h2 id="interests-heading">What interests me</h2><div class="focus-grid grid gap-8 md:grid-cols-3">{interests.map((interest) => <div class="focus-item"><span class="meta focus-number">{interest.number}</span><h3>{interest.title}</h3><p>{interest.description}</p><p class="meta focus-tools">{interest.tools}</p></div>)}</div></section>
+    <section class="snapshot-about"><h2>About</h2><AboutContent /></section>
+    <section class="snapshot-index"><h2>Activity</h2>{entries.length > 0 ? <ol>{entries.map((entry) => <li><a href={`#${entry.id}`}>{entry.data.title}</a><span class="meta"> — {formatDate(entry.data.date)} · {typeLabel(entry.data.type)} · {readingTime(entry)} min read</span></li>)}</ol> : <p class="empty-state">Nothing published yet.</p>}</section>
+    {articles.map(({ entry, Content }) => <article class="snapshot-article" id={entry.id}><header class="article-heading"><p class="meta">{formatDate(entry.data.date)} · {typeLabel(entry.data.type)}</p><h2>{entry.data.title}</h2><p class="page-deck">{entry.data.summary}</p><p class="print-source">Source: <a href={new URL(pathFor(`activity/${entry.id}/`), Astro.site).href}>{new URL(pathFor(`activity/${entry.id}/`), Astro.site).href}</a></p></header>{entry.data.hero && <figure><img src={pathFor(entry.data.hero.src)} alt={entry.data.hero.alt} />{entry.data.hero.caption && <figcaption>{entry.data.hero.caption}</figcaption>}</figure>}<div class="prose"><Content /></div></article>)}
+  </div>
+</Site>
+<script>document.querySelector('#print-button')?.addEventListener('click', () => window.print());</script>

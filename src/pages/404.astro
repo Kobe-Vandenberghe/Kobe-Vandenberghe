@@ -1,0 +1,5 @@
+---
+import Site from '../layouts/Site.astro';
+import { pathFor } from '../lib/urls';
+---
+<Site title="Page not found" noindex><div class="page-heading"><p class="eyebrow meta">404</p><h1>Page not found<span class="accent">.</span></h1><p class="page-deck">This page may have moved, or the address may be incorrect.</p><a class="quiet-link" href={pathFor()}>Back home <span aria-hidden="true">→</span></a></div></Site>

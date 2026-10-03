@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import { profile } from '../data/profile';
+import { pathFor } from '../lib/urls';
+
+interface Props { title?: string; description?: string; section?: string; noindex?: boolean; }
+const { title, description = profile.introduction, section, noindex = false } = Astro.props;
+const pageTitle = title ? `${title} — ${profile.name}` : `${profile.name} — Backend & DevOps`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#FAFAF8" />
+    <link rel="icon" type="image/svg+xml" href={pathFor('favicon.svg')} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header shell">
+      <a class="wordmark" href={pathFor()} aria-current={section === 'home' ? 'page' : undefined}>Kobe Vandenberghe<span class="accent">.</span></a>
+      <nav aria-label="Main navigation">
+        <a href={pathFor()} aria-current={section === 'home' ? 'page' : undefined}>Home</a>
+        <a href={pathFor('activity/')} aria-current={section === 'activity' ? 'page' : undefined}>Activity</a>
+        <a href={pathFor('about/')} aria-current={section === 'about' ? 'page' : undefined}>About</a>
+        <a class="cv-link" href={pathFor('cv/kobe-vandenberghe-cv.pdf')} download>CV <span aria-hidden="true">↓</span><span class="sr-only"> (PDF download)</span></a>
+        <a class="github-nav" href={profile.github}>GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main id="main" class="shell" tabindex="-1"><slot /></main>
+    <footer class="site-footer shell">
+      <span>© {new Date().getFullYear()} {profile.name}</span>
+      <div class="footer-links">
+        <a href={profile.github}>GitHub</a>
+        <a href={profile.linkedin}>LinkedIn</a>
+        <a href={pathFor('exports/kobe-vandenberghe-portfolio.pdf')} download>Portfolio PDF <span aria-hidden="true">↓</span></a>
+      </div>
+    </footer>
+  </body>
+</html>
