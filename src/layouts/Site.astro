@@ -13,6 +13,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {section === 'home' && <meta name="google-site-verification" content="GNuIFSYR0zE_pH0bPuM2PNPdcQik0aV3nZ-ddF012rk" />}
     <meta name="description" content={description} />
     <meta name="theme-color" content="#FAFAF8" />
     <link rel="icon" type="image/svg+xml" href={pathFor('favicon.svg')} />
