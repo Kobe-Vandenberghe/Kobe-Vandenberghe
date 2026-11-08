@@ -63,7 +63,7 @@ The footer's Portfolio PDF downloads a combined snapshot of the introduction, Ab
 
 ## GitHub Pages
 
-The workspace initially had no Git repository or remote. A ready [deployment workflow](.github/workflows/deploy.yml) is included, but no repository has been created or pushed.
+The workspace initially had no Git repository or remote. Ready GitHub Actions workflows are included: [PR validation](.github/workflows/ci.yml) and [deployment](.github/workflows/deploy.yml), but no repository has been created or pushed.
 
 1. Put this project in your GitHub repository on `main`, including `package-lock.json`.
 2. In Settings → Pages, choose GitHub Actions as the source.
