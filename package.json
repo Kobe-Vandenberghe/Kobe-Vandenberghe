@@ -16,13 +16,13 @@
     "verify": "node scripts/verify.mjs"
   },
   "devDependencies": {
-    "@astrojs/check": "0.9.10",
-    "@astrojs/mdx": "8.0.2",
+    "@astrojs/check": "0.9.12",
+    "@astrojs/mdx": "8.1.5",
     "@astrojs/sitemap": "3.7.4",
-    "@tailwindcss/vite": "4.3.3",
-    "astro": "7.3.5",
-    "playwright": "1.63.0",
-    "tailwindcss": "4.3.3",
+    "@tailwindcss/vite": "4.3.5",
+    "astro": "7.4.11",
+    "playwright": "1.65.0",
+    "tailwindcss": "4.3.5",
     "typescript": "6.0.3"
   }
 }
