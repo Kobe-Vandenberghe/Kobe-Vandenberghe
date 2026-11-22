@@ -17,11 +17,11 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
-    "@astrojs/mdx": "8.1.5",
-    "@astrojs/sitemap": "3.7.4",
+    "@astrojs/mdx": "8.1.6",
+    "@astrojs/sitemap": "3.7.6",
     "@tailwindcss/vite": "4.3.5",
-    "astro": "7.4.11",
-    "playwright": "1.65.0",
+    "astro": "7.4.13",
+    "playwright": "1.65.1",
     "tailwindcss": "4.3.5",
     "typescript": "6.0.3"
   }
